@@ -74,14 +74,20 @@ NEXT_PUBLIC_API_URL
 * POST `/api/buyer/register`
 * POST `/api/buyer/login`
 * GET `/api/buyer/me`
+* POST `/api/buyer/logout`
+* POST `/api/buyer/refresh-token`
+
+
+### property
+*GET `/api/properties`
 
 
 
 ### Favourites
 
-* POST `/api/buyer/favourites`
-* DELETE `/api/buyer/favourites/:propertyId`
-* GET `/api/buyer/favourites`
+* POST `/api/favourite/:propertyId`
+* DELETE `/api/favourite/unfavorite:propertyId`
+* GET `/api/favourite/favorite-property`
 
 ---
 
