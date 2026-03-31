@@ -68,7 +68,7 @@ export const UnFavoriteProperty = asyncHandler(
         const { propertyId } = req.params;
 
 
-        console.log(req.user);
+        
 
         // ❌ 1. Auth check
         if (!req.user) {
