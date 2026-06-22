@@ -2,6 +2,41 @@ import type { Request, Response } from "express";
 import { asyncHandler } from "../Middleware/asyncHandler.js";
 import Property from "../Model/PropertyModel.js";
 
+export const bulkCreateProperties = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const properties = req.body;
+
+    console.log(properties)
+
+    if (!Array.isArray(properties) || properties.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: "Request body must be a non-empty array.",
+      });
+      return;
+    }
+
+    const createdProperties = await Property.insertMany(properties);
+
+    res.status(201).json({
+      success: true,
+      message: `${createdProperties.length} properties created successfully.`,
+      total: createdProperties.length,
+      data: createdProperties,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
 export const getAllProperty = asyncHandler(async (req: Request, res: Response) => {
   // 📄 Pagination
   const page = parseInt(req.query.page as string) || 1;
